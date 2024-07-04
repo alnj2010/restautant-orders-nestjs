@@ -1,0 +1,12 @@
+{
+  "configurations": [
+    {
+      "name": "Docker: Attach to Node",
+      "type": "node",
+      "request": "attach",
+      "port": 9229,
+      "remoteRoot": "/usr/src/app",
+      "restart": true
+    }
+  ]
+}
