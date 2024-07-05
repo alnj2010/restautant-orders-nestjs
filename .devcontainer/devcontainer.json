@@ -1,0 +1,17 @@
+// See https://containers.dev/implementors/json_reference/ for configuration reference
+{
+  "name": "kitchen-API project",
+  "dockerComposeFile": "../compose.yml",
+  "service": "kitchen-api",
+  "workspaceFolder": "/usr/src/app",
+  "shutdownAction": "stopCompose",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {
+      "installDirectlyFromGitHubRelease": true,
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers-contrib/features/nestjs-cli:2": {
+      "version": "latest"
+    }
+  }
+}
