@@ -13,5 +13,15 @@
     "ghcr.io/devcontainers-contrib/features/nestjs-cli:2": {
       "version": "latest"
     }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+      ],
+      "settings": {
+        "editor.tabSize": 4,
+        "terminal.integrated.defaultProfile.linux": "zsh"
+      }
+    }
   }
 }

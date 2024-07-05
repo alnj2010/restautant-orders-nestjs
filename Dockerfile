@@ -6,6 +6,9 @@ WORKDIR /usr/src/app
 
 # Install basic development tools
 RUN apt update && apt install -y less man-db sudo
+# Uses "robbyrussell" theme (original Oh My Zsh theme), with no plugins
+RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.2.0/zsh-in-docker.sh)" -- \
+    -t robbyrussell
 
 ENV DEVCONTAINER=true
 
