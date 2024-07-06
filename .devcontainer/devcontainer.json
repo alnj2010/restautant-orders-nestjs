@@ -17,6 +17,10 @@
   "customizations": {
     "vscode": {
       "extensions": [
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "Gruntfuggly.todo-tree",
+        "redhat.vscode-yaml"
       ],
       "settings": {
         "editor.tabSize": 4,
