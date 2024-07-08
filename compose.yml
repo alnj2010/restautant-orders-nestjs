@@ -1,6 +1,8 @@
 services:
   kitchen-api:
-    build: .
+    build:
+      context: .
+      target: dev
     ports:
       - 3000:3000
       - 9229:9229
@@ -10,19 +12,18 @@ services:
         restart: true
     volumes:
       - .:/usr/src/app
-
+      - node_modules:/usr/src/app/node_modules
   kitchen_db_container:
-    image: mysql:8.4
+    image: postgres
     environment:
-      MYSQL_DATABASE: kitchen_db
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_PASSWORD: root
-    ports:
-      - 33060:3306
+      POSTGRES_PASSWORD: root
+    ports: 
+      - 5432:5432
     healthcheck:
-      test: ['CMD-SHELL', "mysql -u root -p${MYSQL_ROOT_PASSWORD} -e 'SELECT 1'"]
-      interval: 5s
-      timeout: 3s
-      retries: 3
-      start_period: 20s
-      start_interval: 3s
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
+volumes:
+  node_modules:

@@ -1,29 +1,34 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import * as mysql from 'mysql2/promise';
+import * as pg from 'pg';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   await app.listen(3000);
 
   try {
-    const connection = await mysql.createConnection({
-      host: 'kitchen_db_container',
-      user: 'root',
+    const { Client } = pg;
+    const client = new Client({
+      user: 'postgres',
       password: 'root',
-      port: 3306,
-      database: 'kitchen_db',
+      host: 'kitchen_db_container',
+      port: 5432,
+      database: 'postgres',
     });
-    connection.query(`CREATE TABLE IF NOT EXISTS Persons (
+    await client.connect();
+    /* 
+     client.query(`CREATE TABLE IF NOT EXISTS Persons (
       PersonID int,
       LastName varchar(255),
       FirstName varchar(255),
       Address varchar(255),
       City varchar(255)
-);`);
+);`);*/
+    await client.end();
     console.log('----------------Si Conecto!!');
   } catch (error) {
-    throw error;
+    console.log('----------------NO Conecto!!', error);
+    //throw error;
   }
 }
 bootstrap();
