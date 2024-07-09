@@ -16,7 +16,7 @@ RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/
     -t robbyrussell
 RUN --mount=type=bind,source=package.json,target=package.json \
     --mount=type=bind,source=package-lock.json,target=package-lock.json \
-    #--mount=type=cache,target=/root/.npm \
+    --mount=type=cache,target=/root/.npm \
     npm ci --include=dev
 COPY . .
 CMD ["npm", "run", "start:debug"]
@@ -26,7 +26,7 @@ FROM base as test
 ENV NODE_ENV test
 RUN --mount=type=bind,source=package.json,target=package.json \
     --mount=type=bind,source=package-lock.json,target=package-lock.json \
-    #--mount=type=cache,target=/root/.npm \
+    --mount=type=cache,target=/root/.npm \
     npm ci --include=dev
 USER node
 COPY . .
@@ -40,7 +40,7 @@ RUN npm run build
 ENV NODE_ENV production
 RUN --mount=type=bind,source=package.json,target=package.json \
     --mount=type=bind,source=package-lock.json,target=package-lock.json \
-    #--mount=type=cache,target=/root/.npm \
+    --mount=type=cache,target=/root/.npm \
     npm ci --only=production && npm cache clean --force
 
 # --------------PROD-------------------------
